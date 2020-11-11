@@ -16,6 +16,9 @@ class Sim:
     def getSize(self):
         return (self.__size_x, self.__size_y)
 
+    def getDelay(self):
+        return self.__delay
+
     def setDelay(self, delay):
         self.__delay = delay
 
@@ -28,8 +31,11 @@ class Sim:
                     new_field[j, i] = None
                     d.update(self.__field)
                     newI, newJ = d.getPos() 
-                    if new_field[newJ, newI] is None:
+                    if newI < self.__size_x and newJ < self.__size_y and new_field[newJ, newI] is None:
                         new_field[newJ, newI] = d
+                    else:
+                        d.setSymbol("x")
+                        new_field[j, i] = d     # if running off the edge, stay in place
         self.__field = new_field
 
 
@@ -52,20 +58,22 @@ class Sim:
         for _ in range(self.__size_x):
             print(fstr.format("="), end="")
         print()
-        time.sleep(self.__delay)
         
 
 if __name__ == "__main__":
-    sim = Sim(10, 20)
+    sim = Sim(10, 25)
     sim.setDelay(1.5)
     sim.addFieldObject(Obstacle(2, 3))
     sim.addFieldObject(Obstacle(2, 2))
     sim.addFieldObject(Obstacle(2, 1))
+    sim.addFieldObject(Obstacle(9, 5))
     sim.addFieldObject(Goal(8, 12))
     sim.addFieldObject(TestDrone1(4, 5))
     sim.addFieldObject(TestDrone2(2, 11))
 
-    sim.print()
-    for _ in range(3):
-        sim.update()
+    for i in range(9):
         sim.print()
+        print("=== Simulation is on update {} ===".format(i))
+        time.sleep(sim.getDelay())
+        sim.update()
+    sim.print()
