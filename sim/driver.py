@@ -17,7 +17,9 @@ def good():
     drones = [SimpleDrone(initial_drone_pos, 0, 3, field_size), SimpleDrone(initial_drone_pos, 1, 3, field_size), SimpleDrone(initial_drone_pos, 2, 3, field_size)]
 
     for i in range(100):
-        sim.print()
+        # sim.print()
+        sim.clear_screen()
+        print(sim)
         print("=== Simulation is on update {} ===".format(i))
         time.sleep(sim.getDelay())
         sim.update()
@@ -25,6 +27,5 @@ def good():
             sim.addFieldObject(drones.pop())
     sim.print()
 
-
-
+good()
 

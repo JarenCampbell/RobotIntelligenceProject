@@ -58,4 +58,28 @@ class Sim:
         for _ in range(self.__size_y):
             print(fstr.format("="), end="")
         print()
+
+    def __str__(self):
+        res = ""
+        fstr = "{:^3}"
+
+        res += " "
+        for _ in range(self.__size_y):
+            res += fstr.format("=")
+        res += '\n'
+
+        for col in self.field:
+            res += '|'
+            for c in col:
+                res += fstr.format("" if c is None else str(c))
+            res += "|\n"
+
+        res += " "
+        for _ in range(self.__size_y):
+            res += fstr.format("=")
+        
+        return res
+
+    def clear_screen(self):
+        os.system('cls' if os.name=='nt' else 'clear')
         
