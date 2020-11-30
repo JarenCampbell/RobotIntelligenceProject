@@ -1,4 +1,4 @@
-from FieldObjects.py import FieldObject, Drone
+from FieldObjects import FieldObject, Drone
 
 ### example class for drone abstract base class
 class TestDrone1(Drone):

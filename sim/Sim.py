@@ -1,5 +1,6 @@
 import numpy as np
-from FieldObjects import *
+from FieldObjects import Obstacle, Goal, Drone
+from Drones import *
 import os
 import time
 
@@ -10,6 +11,7 @@ class Sim:
         self.__size_y = size_y
         self.field = [[None for y in range(size_y)] for x in range(size_x)]
         self.__delay = 1.0
+        self.solved = False
     
     def addFieldObject(self, o):
         self.field[o.getX()][o.getY()] = o
@@ -24,6 +26,8 @@ class Sim:
         self.__delay = delay
 
     def update(self):
+        if self.solved:
+            return
         new_field = []
         for i in range(self.__size_x):
             new_field.append([x for x in self.field[i]])
@@ -37,6 +41,8 @@ class Sim:
                     newI, newJ = d.getPos()
                     if 0 <= newI < self.__size_x and 0 <= newJ < self.__size_y:
                         new_field[newI][newJ] = d
+                        if isinstance(self.field[newI][newJ], Goal):
+                            self.solved = True
         self.field = new_field
 
     def print(self):
