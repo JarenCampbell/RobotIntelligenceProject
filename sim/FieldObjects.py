@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import random   # For randomly moving drones
 
 ### abstract class for all objects that exist on the simulation field
 class FieldObject:
@@ -143,6 +144,39 @@ class SimpleDrone(Drone):
 
         # print("new x,y: " + str(x) + "," + str(y))
         super().update(x, y)    #use super().update to set the new x and y positions in the class
+
+### Drone will move randomly
+class RandomMovementDrone(Drone):
+    def __init__(self, pos_x, pos_y, show_dir=False, orientation=0):
+        super().__init__(pos_x, pos_y, show_dir, orientation)
+
+    ## example of how to use 
+    def update(self, field):    #update will be passed a copy of the field
+        x, y = super().getPos() #get the current position 
+
+        randX = random.randint(-1, 1)
+        randY = random.randint(-1, 1)
+
+        attemptedPosition = field[x + randX][y + randY]
+
+        # If the random direction has an obstacle or drone, try another random direction
+
+        while (isinstance(attemptedPosition, (Obstacle, Drone)) 
+                or x + randX < 0 or x + randX > len(field) 
+                or y + randY < 0 or y + randY > len(field[0])):
+            randX = random.randint(-1, 1)
+            randY = random.randint(-1, 1)
+            attemptedPosition = field[x + randX][y + randY]
+        
+        # Case where goal is found
+        if isinstance(field[x + randX][y + randY], Goal):
+            self.setSymbol("X")
+            return True
+        else:
+            x += randX
+            y += randY
+        super().update(x, y)
+        return False
 
 
 ### Goal class
