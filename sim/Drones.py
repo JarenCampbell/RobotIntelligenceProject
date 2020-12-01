@@ -1,4 +1,6 @@
-from FieldObjects import FieldObject, Drone
+from FieldObjects.py import FieldObject, Drone
+import random   # For randomly moving drone
+
 
 ### example class for drone abstract base class
 class TestDrone1(Drone):
@@ -100,3 +102,27 @@ class SimpleDrone(Drone):
         # print("new x,y: " + str(x) + "," + str(y))
         super().update(x, y)    #use super().update to set the new x and y positions in the class
 
+### Drone will move randomly
+class RandomMovementDrone(Drone):
+    def __init__(self, pos_x, pos_y, show_dir=False, orientation=0):
+        super().__init__(pos_x, pos_y, show_dir, orientation)
+
+    ## example of how to use 
+    def update(self, field):    #update will be passed a copy of the field
+        x, y = super().getPos() #get the current position 
+
+        randX = random.randint(-1, 1)
+        randY = random.randint(-1, 1)
+
+        attemptedPosition = field[x + randX][y + randY]
+
+        # If the random direction has an obstacle or drone, try another random direction
+        while isinstance(attemptedPosition, Obstacle) or isinstance(attemptedPosition, Drone):
+            randX = random.randint(-1, 1)
+            randY = random.randint(-1, 1)
+        
+        # Case where goal is found
+        if isinstance(field[x + randX][y + randY], Goal):
+            self.setSymbol("X")
+        else:
+            super.update(x + randX, y + randY)

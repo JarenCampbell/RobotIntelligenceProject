@@ -37,7 +37,8 @@ class Sim:
                 if isinstance(self.field[i][j], Drone):
                     d = self.field[i][j]
                     new_field[i][j] = None
-                    d.update(self.field)
+                    if d.update(self.field):        ## ADDED THIS
+                        return True                  # ADDED THIS
                     newI, newJ = d.getPos()
                     if 0 <= newI < self.__size_x and 0 <= newJ < self.__size_y:
                         new_field[newI][newJ] = d

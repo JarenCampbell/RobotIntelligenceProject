@@ -33,6 +33,37 @@ def good():
             sim.addFieldObject(drones.pop())
     sim.print()
 
+def randomMovement():
+    field_size = (12,15)
+    startX, startY = 0, 0
+    sim = Sim(field_size[0], field_size[1])
+    sim.setDelay(.2)
+    sim.addFieldObject(Obstacle(2, 3))
+    sim.addFieldObject(Obstacle(2, 2))
+    sim.addFieldObject(Obstacle(2, 1))
+    sim.addFieldObject(Obstacle(9, 5))
+    sim.addFieldObject(Goal(5, 5))
+    # sim.addFieldObject(SimpleDrone(initial_drone_pos, 0, 2, field_size))
+    # sim.addFieldObject(SimpleDrone(initial_drone_pos, 1, 2, field_size))
+    drones = []
+    for i in range(5):
+        sim.addFieldObject(RandomMovementDrone(startX, startY + i))
+
+    for i in range(100):
+        # sim.print()
+        sim.clear_screen()
+        print(sim)
+        print("=== Simulation is on update {} ===".format(i))
+        time.sleep(sim.getDelay())
+        if sim.update():        # ADDED THIS
+            break
+        # if len(drones) > 0:
+        #     sim.addFieldObject(drones.pop())
+    sim.print()
+
+# good()
+# randomMovement()
+
 def randomSearchTest():
     size_x = 5
     size_y = 4
@@ -75,4 +106,4 @@ def randomSearchTest():
         return True
     return False
 
-randomSearchTest()
+# randomSearchTest()
