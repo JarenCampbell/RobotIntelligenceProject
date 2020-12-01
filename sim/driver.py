@@ -41,7 +41,7 @@ def randomMovement():
     # sim.addFieldObject(SimpleDrone(initial_drone_pos, 1, 2, field_size))
     drones = []
     for i in range(5):
-        drones.append(RandomMovementDrone(startX, startY))
+        sim.addFieldObject(RandomMovementDrone(startX, startY + i))
 
     for i in range(100):
         # sim.print()
@@ -51,8 +51,8 @@ def randomMovement():
         time.sleep(sim.getDelay())
         if sim.update():        # ADDED THIS
             break
-        if len(drones) > 0:
-            sim.addFieldObject(drones.pop())
+        # if len(drones) > 0:
+        #     sim.addFieldObject(drones.pop())
     sim.print()
 
     
