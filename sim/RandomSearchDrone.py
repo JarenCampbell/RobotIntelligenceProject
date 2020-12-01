@@ -34,6 +34,8 @@ class RandomSearchDrone(Drone):
             if isinstance(field[_x, _y], Goal):
                 self.__searched[_x, _y] = self.__code[Goal]
                 self.__temp_goal = (_x, _y)
+                self.setSymbol("X")
+                return True
             # if isinstance(field[_x, _y], Drone):
             #     field[_x, _y].recieveSearched(self.__searched)
             #     illegal_moves.append(field[_x, _y].getPos())
@@ -77,6 +79,8 @@ class RandomSearchDrone(Drone):
             if len(self.__hist) > 3:
                 self.__hist.pop(0)
             super().update(min_x, min_y)
+        
+        return False
 
         
     def _find_random(self):

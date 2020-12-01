@@ -65,8 +65,8 @@ def randomMovement():
 # randomMovement()
 
 def randomSearchTest():
-    size_x = 5
-    size_y = 4
+    size_x = 10
+    size_y = 10
     area = size_x * size_y
     sim = Sim(size_x, size_y)
 
@@ -81,7 +81,7 @@ def randomSearchTest():
         sim.addFieldObject(RandomSearchDrone(pos[0], pos[1], (size_x, size_y)))
 
     #add goals
-    for _ in range(0):
+    for _ in range(1):
         pos = rand_pos(size_x, size_y)
         sim.addFieldObject(Goal(pos[0], pos[1]))
     
@@ -93,7 +93,8 @@ def randomSearchTest():
         # print(sim)
         print("=== Simulation is on update {} ===".format(i))
         time.sleep(sim.getDelay())
-        sim.update()
+        if sim.update():
+            break
         if sim.solved:
             s = True
             break
@@ -106,4 +107,4 @@ def randomSearchTest():
         return True
     return False
 
-# randomSearchTest()
+randomSearchTest()

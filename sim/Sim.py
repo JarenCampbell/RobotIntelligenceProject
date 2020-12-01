@@ -45,6 +45,8 @@ class Sim:
                         if isinstance(self.field[newI][newJ], Goal):
                             self.solved = True
         self.field = new_field
+        
+        return False
 
     def print(self):
         fstr = "{:^3}"

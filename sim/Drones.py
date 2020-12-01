@@ -1,4 +1,4 @@
-from FieldObjects.py import FieldObject, Drone
+from FieldObjects import FieldObject, Drone
 import random   # For randomly moving drone
 
 
