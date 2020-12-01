@@ -1,6 +1,12 @@
-from FieldObjects import *
+from FieldObjects import FieldObject, Obstacle, Drone, Goal
+from Drones import *
+from RandomSearchDrone import RandomSearchDrone
 from Sim import Sim
 import time
+from random import randint
+
+def rand_pos(max_x, max_y):
+    return randint(0, max_x-1), randint(0, max_y-1)
 
 def good():
     field_size = (12,15)
@@ -55,12 +61,49 @@ def randomMovement():
         #     sim.addFieldObject(drones.pop())
     sim.print()
 
-    
-
-
 # good()
-randomMovement()
+# randomMovement()
 
+def randomSearchTest():
+    size_x = 5
+    size_y = 4
+    area = size_x * size_y
+    sim = Sim(size_x, size_y)
 
+    #add obstacles
+    for _ in range(int(area * 0)):
+        pos = rand_pos(size_x, size_y)
+        sim.addFieldObject(Obstacle(pos[0], pos[1]))
 
+    #add drones
+    for _ in range(int(5)):
+        pos = rand_pos(size_x, size_y)
+        sim.addFieldObject(RandomSearchDrone(pos[0], pos[1], (size_x, size_y)))
 
+    #add goals
+    for _ in range(0):
+        pos = rand_pos(size_x, size_y)
+        sim.addFieldObject(Goal(pos[0], pos[1]))
+    
+    #run sim
+    s = False
+    for i in range(300):
+        sim.print()
+        # sim.clear_screen()
+        # print(sim)
+        print("=== Simulation is on update {} ===".format(i))
+        time.sleep(sim.getDelay())
+        sim.update()
+        if sim.solved:
+            s = True
+            break
+        # if len(drones) > 0:
+        #     sim.addFieldObject(drones.pop())
+    sim.print() 
+    print("Ran for {} itereations".format(i))
+    if s:
+        print("Congradulations the simulation was solved")
+        return True
+    return False
+
+# randomSearchTest()

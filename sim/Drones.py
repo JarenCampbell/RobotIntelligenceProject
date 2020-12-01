@@ -1,6 +1,7 @@
 from FieldObjects.py import FieldObject, Drone
 import random   # For randomly moving drone
 
+
 ### example class for drone abstract base class
 class TestDrone1(Drone):
     def __init__(self, pos_x, pos_y, show_dir=False, orientation=0):
