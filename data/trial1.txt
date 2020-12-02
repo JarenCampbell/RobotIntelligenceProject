@@ -1,0 +1,18 @@
+32x32 simulation size
+5 drones
+1/10 of all cells randomly chosen as obstacles
+100 simulations per algorithm
+cut-off at 10,000 iterations
+
+Average number of iterations required: 1714.38
+Average number of iterations required: 302.4
+Average number of iterations required: 107.22
+
+
+
+
+
+All same except 300 simulations per algorithm
+Average number of iterations required: 1751.51
+Average number of iterations required: 359.13
+Average number of iterations required: 173.76
