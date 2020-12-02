@@ -2,6 +2,7 @@ from FieldObjects import FieldObject, Obstacle, Drone, Goal
 from Drones import *
 from RandomSearchDrone import RandomSearchDrone
 from ProbabilityDensityDrone import ProbabilityDensityDrone
+from RandomMovementDrone import RandomMovementDrone
 from Sim import Sim
 import time
 from random import randint
@@ -160,9 +161,74 @@ def probabilityDensityTest():
         return True
     return False
 
+def roughDraftSims():
+    size_x = 16
+    size_y = 16
+    area = size_x * size_y
+
+    startX = 0
+    startY = 0
+
+    for i in range(1):
+        all_num_iter = []
+        for j in range(100):
+            # Create sim
+            sim = Sim(size_x, size_y)
+            sim.setDelay(0)
+
+            #add obstacles
+            for _ in range(int(area / 10)):
+                pos = rand_pos(size_x, size_y)
+                sim.addFieldObject(Obstacle(pos[0], pos[1]))
+
+            #add drones
+            # for k in range(int(5)):
+            #     if i == 0:
+            #         sim.addFieldObject(RandomMovementDrone(startX, startY))
+            #     elif i == 1:
+            #         sim.addFieldObject(RandomSearchDrone(startX, startY, (size_x, size_y)))
+            #     else:
+            #         sim.addFieldObject(ProbabilityDensityDrone(startX, startY, (size_x, size_y)))
+
+            num_drones = 5
+
+            #add goals
+            for _ in range(1):
+                pos = rand_pos(size_x, size_y)
+                sim.addFieldObject(Goal(pos[0], pos[1]))
+            
+            num_iter = 0
+            for k in range(1000):
+                if num_drones > 0:
+                    if sim.field[startX][startY] == None:
+                        if i == 0:
+                            sim.addFieldObject(RandomMovementDrone(startX, startY))
+                        elif i == 1:
+                            sim.addFieldObject(RandomSearchDrone(startX, startY, (size_x, size_y)))
+                        else:
+                            sim.addFieldObject(ProbabilityDensityDrone(startX, startY, (size_x, size_y)))
+                        num_drones -= 1
+                
+                # sim.print()
+                # print("=== Simulation is on update {} ===".format(k))
+                
+                time.sleep(sim.getDelay())
+                if sim.update():
+                    num_iter = k
+                    break
+                num_iter = k
+            all_num_iter.append(num_iter)
+            
+            print("Number of iterations required:", num_iter)
+        print("Average number of iterations required:", str(sum(all_num_iter) / len(all_num_iter)))
+
+    
+
 
 if __name__ == "__main__":
     # good()
     # randomMovement()
     # randomSearchTest()
-    probabilityDensityTest()
+    # probabilityDensityTest()
+
+    roughDraftSims()
