@@ -108,20 +108,25 @@ def randomSearchTest():
 
 
 def probabilityDensityTest():
-    size_x = 10
-    size_y = 10
+    size_x = 20
+    size_y = 20
     area = size_x * size_y
+    num_drones = 5
+    d_start_x = 0
+    d_start_y = 0
     sim = Sim(size_x, size_y)
 
     #add obstacles
-    for _ in range(int(area * 0)):
+    for _ in range(int(10)):
         pos = rand_pos(size_x, size_y)
+        if pos == (d_start_x, d_start_y):
+            continue
         sim.addFieldObject(Obstacle(pos[0], pos[1]))
 
-    #add drones
-    for _ in range(int(5)):
-        pos = rand_pos(size_x, size_y)
-        sim.addFieldObject(ProbabilityDensityDrone(pos[0], pos[1], (size_x, size_y)))
+    # #add drones in random locations
+    # for _ in range(int(5)):
+    #     pos = rand_pos(size_x, size_y)
+    #     sim.addFieldObject(ProbabilityDensityDrone(pos[0], pos[1], (size_x, size_y)))
 
     #add goals
     for _ in range(1):
@@ -131,6 +136,11 @@ def probabilityDensityTest():
     #run sim
     s = False
     for i in range(50):
+        if num_drones > 0:
+            if sim.field[d_start_x][d_start_y] == None:
+                sim.addFieldObject(ProbabilityDensityDrone(d_start_x, d_start_y, (size_x, size_y)))
+                num_drones -= 1
+
         sim.print()
         # sim.clear_screen()
         # print(sim)

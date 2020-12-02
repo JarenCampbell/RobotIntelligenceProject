@@ -14,7 +14,7 @@ class ProbabilityDensityDrone(Drone):
 
     def update(self, field):
         field = np.array(field)
-        if -1 not in self.__probability_density or 2 in self.__probability_density:
+        if -inf in self.__probability_density:
             return True
         moves = []
         x, y = super().getPos()
@@ -43,7 +43,8 @@ class ProbabilityDensityDrone(Drone):
                 if _x == x and _y == y:
                     continue
                 if isinstance(field[_x, _y], Drone):
-                    field[_x, _y].recieveSearched(self.__probability_density)
+                    field[_x, _y].update_probability_density(self.__probability_density)
+                    self.update_probability_density(field[_x, _y].get_probability_density())
                     illegal_moves.append(field[_x, _y].getPos()) 
                 
         
@@ -57,41 +58,24 @@ class ProbabilityDensityDrone(Drone):
                 
         try:
             shuffle(moves)
-            min_density, (min_x, min_y) = min(moves)
+            min_density = inf
+            min_x = x
+            min_y = y
+            for m in moves:
+                if m[0] < min_density:
+                    min_density = m[0]
+                    min_x, min_y = m[1]
+            # min_density, (min_x, min_y) = min(moves)
         except ValueError:
             return
         super().update(min_x, min_y)
         self.__probability_density[min_x, min_y] += 0.5
         return False
 
+    def get_probability_density(self):
+        return self.__probability_density
         
-    # def _find_random(self):
-    #     self.__hist = []
-    #     while 0 in self.__probability_density:
-    #         rand_x = randint(0, self.__field_size[0]-1)
-    #         rand_y = randint(0, self.__field_size[1]-1)
-    #         if self.__probability_density[rand_x, rand_y] == 0:
-    #             break
-    #     self.__temp_goal = (rand_x, rand_y) 
-
-    # def __cost(self, pos):
-    #     goal = self.__temp_goal
-    #     if self.__probability_density[pos] == -1:
-    #         return inf
-    #     if goal == pos:
-    #         return 0
-
-    #     del_x = abs(pos[0] - goal[0])
-    #     del_y = abs(pos[1] - goal[1])
-
-    #     if self.__probability_density[pos] == 1:
-    #         offset = self.__offset_size
-    #     else:
-    #         offset = 0
-    #     return pow( pow(del_y, 2) + pow(del_x, 2) , 0.5) + offset
-
-
-    def recieve_probability_density(self, prob):
+    def update_probability_density(self, prob):
         for i in range(self.__field_size[0]):
             for j in range(self.__field_size[1]):
                 if prob[i, j] > self.__probability_density[i, j]:
