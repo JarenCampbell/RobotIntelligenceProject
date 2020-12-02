@@ -165,8 +165,8 @@ def probabilityDensityTest():
     return False
 
 def roughDraftSims():
-    size_x = 16
-    size_y = 16
+    size_x = 32
+    size_y = 32
     area = size_x * size_y
 
     startX = 0
@@ -174,7 +174,7 @@ def roughDraftSims():
 
     for i in range(3):
         all_num_iter = []
-        for j in range(100):
+        for j in range(300):
             # Create sim
             sim = Sim(size_x, size_y)
             sim.setDelay(0)
@@ -201,7 +201,7 @@ def roughDraftSims():
                 sim.addFieldObject(Goal(pos[0], pos[1]))
             
             num_iter = 0
-            for k in range(1000):
+            for k in range(10000):
                 if num_drones > 0:
                     if sim.field[startX][startY] == None:
                         if i == 0:
