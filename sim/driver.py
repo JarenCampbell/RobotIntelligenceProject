@@ -8,7 +8,10 @@ import time
 from random import randint
 
 def rand_pos(max_x, max_y):
-    return randint(0, max_x-1), randint(0, max_y-1)
+    rand_pos = randint(0, max_x-1), randint(0, max_y-1)
+    while rand_pos[0] == 0 and rand_pos[1] == 0:
+        rand_pos = randint(0, max_x-1), randint(0, max_y-1)
+    return rand_pos
 
 def good():
     field_size = (12,15)
@@ -169,7 +172,7 @@ def roughDraftSims():
     startX = 0
     startY = 0
 
-    for i in range(1):
+    for i in range(3):
         all_num_iter = []
         for j in range(100):
             # Create sim
@@ -219,7 +222,7 @@ def roughDraftSims():
                 num_iter = k
             all_num_iter.append(num_iter)
             
-            print("Number of iterations required:", num_iter)
+            # print("Number of iterations required:", num_iter)
         print("Average number of iterations required:", str(sum(all_num_iter) / len(all_num_iter)))
 
     
