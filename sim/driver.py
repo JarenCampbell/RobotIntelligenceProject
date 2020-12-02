@@ -1,6 +1,7 @@
 from FieldObjects import FieldObject, Obstacle, Drone, Goal
 from Drones import *
 from RandomSearchDrone import RandomSearchDrone
+from ProbabilityDensityDrone import ProbabilityDensityDrone
 from Sim import Sim
 import time
 from random import randint
@@ -61,8 +62,6 @@ def randomMovement():
         #     sim.addFieldObject(drones.pop())
     sim.print()
 
-# good()
-# randomMovement()
 
 def randomSearchTest():
     size_x = 10
@@ -107,4 +106,63 @@ def randomSearchTest():
         return True
     return False
 
-randomSearchTest()
+
+def probabilityDensityTest():
+    size_x = 20
+    size_y = 20
+    area = size_x * size_y
+    num_drones = 5
+    d_start_x = 0
+    d_start_y = 0
+    sim = Sim(size_x, size_y)
+
+    #add obstacles
+    for _ in range(int(10)):
+        pos = rand_pos(size_x, size_y)
+        if pos == (d_start_x, d_start_y):
+            continue
+        sim.addFieldObject(Obstacle(pos[0], pos[1]))
+
+    # #add drones in random locations
+    # for _ in range(int(5)):
+    #     pos = rand_pos(size_x, size_y)
+    #     sim.addFieldObject(ProbabilityDensityDrone(pos[0], pos[1], (size_x, size_y)))
+
+    #add goals
+    for _ in range(1):
+        pos = rand_pos(size_x, size_y)
+        sim.addFieldObject(Goal(pos[0], pos[1]))
+    
+    #run sim
+    s = False
+    for i in range(50):
+        if num_drones > 0:
+            if sim.field[d_start_x][d_start_y] == None:
+                sim.addFieldObject(ProbabilityDensityDrone(d_start_x, d_start_y, (size_x, size_y)))
+                num_drones -= 1
+
+        sim.print()
+        # sim.clear_screen()
+        # print(sim)
+        print("=== Simulation is on update {} ===".format(i))
+        time.sleep(sim.getDelay())
+        if sim.update():
+            break
+        if sim.solved:
+            s = True
+            break
+        # if len(drones) > 0:
+        #     sim.addFieldObject(drones.pop())
+    sim.print() 
+    print("Ran for {} itereations".format(i))
+    if s:
+        print("Congradulations the simulation was solved")
+        return True
+    return False
+
+
+if __name__ == "__main__":
+    # good()
+    # randomMovement()
+    # randomSearchTest()
+    probabilityDensityTest()
