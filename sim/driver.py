@@ -119,7 +119,7 @@ def probabilityDensityTest():
     d_start_x = 0
     d_start_y = 0
     sim = Sim(size_x, size_y)
-    sim.setDelay(1)
+    sim.setDelay(0.5)
 
     #add obstacles
     for _ in range(int(area / 20)):
