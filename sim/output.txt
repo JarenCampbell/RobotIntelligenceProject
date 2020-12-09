@@ -1,0 +1,24 @@
+MAP SIZE: 20x20
+Average number of iterations required: 624.0133333333333
+Average number of iterations required: 192.68666666666667
+Average number of iterations required: 108.72666666666667
+
+MAP SIZE: 40x40
+Average number of iterations required: 2108.1666666666665
+Average number of iterations required: 451.17
+Average number of iterations required: 222.60333333333332
+
+MAP SIZE: 60x60
+Average number of iterations required: 4125.83
+Average number of iterations required: 921.52
+Average number of iterations required: 559.27
+
+MAP SIZE: 80x80
+Average number of iterations required: 6574.213333333333
+Average number of iterations required: 1624.11
+Average number of iterations required: 928.5333333333333
+
+MAP SIZE: 100x100
+Average number of iterations required: 10497.613333333333
+Average number of iterations required: 2301.7433333333333
+Average number of iterations required: 1266.0633333333333

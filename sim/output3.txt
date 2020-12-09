@@ -1,0 +1,93 @@
+
+NUM DRONES: 4
+Average number of iterations required: 2137.483333333333
+Average number of iterations required: 389.06
+Average number of iterations required: 202.52333333333334
+
+NUM DRONES: 6
+Average number of iterations required: 1971.1466666666668
+Average number of iterations required: 335.58666666666664
+Average number of iterations required: 241.98333333333332
+
+NUM DRONES: 8
+Average number of iterations required: 1911.12
+Average number of iterations required: 337.2033333333333
+Average number of iterations required: 147.49666666666667
+
+NUM DRONES: 10
+Average number of iterations required: 1883.0033333333333
+Average number of iterations required: 461.82666666666665
+Average number of iterations required: 208.49
+
+NUM DRONES: 12
+Average number of iterations required: 1805.1166666666666
+Average number of iterations required: 292.75666666666666
+Average number of iterations required: 197.46
+
+NUM DRONES: 14
+Average number of iterations required: 1701.2733333333333
+Average number of iterations required: 254.98333333333332
+Average number of iterations required: 169.74333333333334
+
+NUM DRONES: 16
+Average number of iterations required: 1579.3766666666668
+Average number of iterations required: 225.34333333333333
+Average number of iterations required: 191.82
+
+NUM DRONES: 18
+Average number of iterations required: 1674.1733333333334
+Average number of iterations required: 201.09666666666666
+Average number of iterations required: 142.02666666666667
+
+NUM DRONES: 20
+Average number of iterations required: 1845.0333333333333
+Average number of iterations required: 158.60333333333332
+Average number of iterations required: 168.16
+
+NUM DRONES: 22
+Average number of iterations required: 1330.5433333333333
+Average number of iterations required: 149.99333333333334
+Average number of iterations required: 110.7
+
+NUM DRONES: 24
+Average number of iterations required: 1531.94
+Average number of iterations required: 172.48
+Average number of iterations required: 162.07
+
+NUM DRONES: 26
+Average number of iterations required: 1570.67
+Average number of iterations required: 110.44
+Average number of iterations required: 88.19
+
+NUM DRONES: 28
+Average number of iterations required: 1179.47
+Average number of iterations required: 228.5
+Average number of iterations required: 76.52
+
+NUM DRONES: 30
+Average number of iterations required: 1917.25
+Average number of iterations required: 389.29
+Average number of iterations required: 90.28
+
+NUM DRONES: 32
+Average number of iterations required: 1428.83
+Average number of iterations required: 246.92
+Average number of iterations required: 399.89
+
+NUM DRONES: 34
+Average number of iterations required: 2106.39
+Average number of iterations required: 82.25
+Average number of iterations required: 168.5
+
+NUM DRONES: 36
+Average number of iterations required: 1606.08
+Average number of iterations required: 163.96
+Average number of iterations required: 157.18
+
+NUM DRONES: 38
+Average number of iterations required: 1849.0
+Average number of iterations required: 227.77
+Average number of iterations required: 161.46
+
+NUM DRONES: 40
+Average number of iterations required: 1574.42
