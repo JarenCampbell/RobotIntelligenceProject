@@ -1,0 +1,76 @@
+
+probability density drone:
+
+    def update(field):
+        moves = []
+        x, y = current position
+        illegal_moves = []
+    
+        for _x, _y in possible_moves:
+            if field[_x, _y] is Goal:
+                return True
+            if field[_x, _y] is Obstacle:
+                prob_dens[_x, _y] = inf
+            else:
+                prob_dens[_x, _y] += 0.5
+                moves.append(( prob_dens[_x, _y], (_x, _y) ))
+
+        #search for other drones
+        for _x in range(x-2, x+3):
+            for _y in range(y-2, y+3):
+                if field[_x, _y] is Drone:
+                    other = field[_x, _y]
+                    share prob_dens
+                    get prob_dens form other
+                    illegal_moves.append(field[_x, _y].getPos()) 
+                
+        
+        #remove illegal moves
+        for i in illegal_moves:
+            moves.remove(l)
+
+        min_density, (min_x, min_y) = min(moves)
+        
+        self.position = min_x, min_y
+        prob_dens[min_x, min_y] += 0.5
+        return False
+
+
+
+random search drone:
+    def update(field):
+        if found temp_goal:
+            temp_goal = random()
+        moves = []
+        illegal_moves = []
+        for _x, _y in possible_moves:
+            if field[_x, _y] is Goal:
+                return True
+            if field[_x, _y] is Obstacle:
+                searched[_x, _y] = Obstacle
+            else:
+                moves.append( (cost((_x, _y)), (_x, _y) ))
+
+        #search for other drones
+        for _x in range(x-2, x+3):
+            for _y in range(y-2, y+3):
+                if field[_x, _y] is Drone:
+                    field[_x, _y].recieveSearched(searched)
+                    illegal_moves.append(field[_x, _y].getPos()) 
+                
+        
+        #remove illegal moves
+        for l in illegal_moves:
+            moves.remove(l)
+                
+        min_val, (min_x, min_y) = min(moves)
+
+        if could not move:
+            temp_goal = random()
+        elif revisiting recent spaces:
+            temp_goal = random()
+        else:
+            self.position = min_x, min_y 
+        return False
+
+
