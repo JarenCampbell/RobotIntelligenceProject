@@ -1,6 +1,4 @@
-Robot intelligence class project
+Temporary Group Name | Semester Project
 
-
-
-a link to a paper I saved for some reason
-https://link.springer.com/article/10.1186/s41018-018-0045-4
+All the code used to run our simulations is included in this GitHub repository.
+Please let us know if you have any questions or concerns.
